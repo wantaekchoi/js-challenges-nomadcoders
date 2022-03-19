@@ -5,9 +5,11 @@ const chosenImage = images[Math.floor(Math.random() * images.length)];
 const imageUrl = `url('img/${chosenImage}')`;
 
 document.body.style.backgroundImage = imageUrl;
-console.log(document.body.style.backgroundImage);
 
-// const url = "https://www.reddit.com/r/wallpaper/"
+// const url = "https://www.reddit.com/r/wallpaper"
+// fetch(url).then((response) => {
+//     console.log(response);
+// });
 // const images = document.querySelectorAll('img[alt="Post image"]');
 // console.log(images.length);
 // for (let image of images) {
