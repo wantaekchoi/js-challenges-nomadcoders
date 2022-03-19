@@ -41,7 +41,7 @@ function paintToDo(newTodo) {
     li.appendChild(doneButton);
     li.appendChild(deleteButton);
     li.appendChild(span);
-    
+
     toDoList.appendChild(li);
 }
 

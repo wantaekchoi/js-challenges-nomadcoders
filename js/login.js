@@ -1,3 +1,5 @@
+// import * as todos from './todo.js';
+
 const loginForm = document.querySelector("#login-form");
 const loginInput = document.querySelector("#login-form input");
 const greetingForm = document.querySelector("#greeting-form");
@@ -21,9 +23,8 @@ function onLoginSubmit(event) {
 
 // remove user name and refresh 
 function onLogoutSubmit(event) {
-    event.preventDefault();
-
-    localStorage.removeItem(USERNAME_KEY);
+    localStorage.clear();
+    // localStorage.removeItem(USERNAME_KEY);
     displayForm();
 }
 
