@@ -1,12 +1,17 @@
-// import css/style.css
-
 const loginForm = document.querySelector("#login-form");
 const loginInput = document.querySelector("#login-form input");
-const greeting = document.querySelector("#greeting");
+const greetingForm = document.querySelector("#greeting-form");
+const greetingMessage = document.querySelector("#greeting-form h1");
 
 const HIDDEN_CLASSNAME = "hidden";
 const USERNAME_KEY = "username";
 
+function paintGreetings(username) {
+    greetingMessage.innerText = `Hello ${username}`;
+    greetingForm.classList.remove(HIDDEN_CLASSNAME);
+}
+
+// add user name and and paint greetings
 function onLoginSubmit(event) {
     event.preventDefault();
     loginForm.classList.add(HIDDEN_CLASSNAME);
@@ -15,9 +20,10 @@ function onLoginSubmit(event) {
     paintGreetings(username);
 }
 
-function paintGreetings(username) {
-    greeting.innerText = `Hello ${username}`;
-    greeting.classList.remove(HIDDEN_CLASSNAME);
+// remove user name and refresh 
+function onLogoutSubmit(event) {
+    greetingForm.classList.add(HIDDEN_CLASSNAME);
+    localStorage.removeItem(USERNAME_KEY);
 }
 
 const savedUsername = localStorage.getItem(USERNAME_KEY);
@@ -27,4 +33,5 @@ if (savedUsername === null) {
     loginForm.addEventListener("submit", onLoginSubmit);
 } else {
     paintGreetings(savedUsername);
+    greetingForm.addEventListener("submit", onLogoutSubmit);
 }
