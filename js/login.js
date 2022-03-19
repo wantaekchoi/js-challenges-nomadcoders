@@ -7,31 +7,39 @@ const HIDDEN_CLASSNAME = "hidden";
 const USERNAME_KEY = "username";
 
 function paintGreetings(username) {
-    greetingMessage.innerText = `Hello ${username}`;
-    greetingForm.classList.remove(HIDDEN_CLASSNAME);
+    greetingMessage.innerText = `Hello ${username}!`;
 }
 
 // add user name and and paint greetings
 function onLoginSubmit(event) {
     event.preventDefault();
-    loginForm.classList.add(HIDDEN_CLASSNAME);
+
     const username = loginInput.value;
     localStorage.setItem(USERNAME_KEY, username);
-    paintGreetings(username);
+    displayForm();
 }
 
 // remove user name and refresh 
 function onLogoutSubmit(event) {
-    greetingForm.classList.add(HIDDEN_CLASSNAME);
+    event.preventDefault();
+
     localStorage.removeItem(USERNAME_KEY);
+    displayForm();
 }
 
-const savedUsername = localStorage.getItem(USERNAME_KEY);
-
-if (savedUsername === null) {
-    loginForm.classList.remove(HIDDEN_CLASSNAME);
-    loginForm.addEventListener("submit", onLoginSubmit);
-} else {
-    paintGreetings(savedUsername);
-    greetingForm.addEventListener("submit", onLogoutSubmit);
+function displayForm() {
+    const savedUsername = localStorage.getItem(USERNAME_KEY);
+    
+    if (savedUsername === null) {
+        greetingForm.classList.add(HIDDEN_CLASSNAME);
+        loginForm.classList.remove(HIDDEN_CLASSNAME);
+    } else {
+        paintGreetings(savedUsername);
+        loginForm.classList.add(HIDDEN_CLASSNAME);
+        greetingForm.classList.remove(HIDDEN_CLASSNAME);
+    }
 }
+
+loginForm.addEventListener("submit", onLoginSubmit);
+greetingForm.addEventListener("submit", onLogoutSubmit);
+displayForm();
